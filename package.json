@@ -1,0 +1,19 @@
+{
+  "name": "firstone",
+  "version": "1.0.0",
+  "main": "(main.js) (object.js)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MANiTAR924/firstOne.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MANiTAR924/firstOne/issues"
+  },
+  "homepage": "https://github.com/MANiTAR924/firstOne#readme",
+  "description": ""
+}
