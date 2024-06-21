@@ -1,15 +1,15 @@
 {
   "name": "firstone",
   "version": "1.0.0",
-  "main": "(main.js) (object.js)",
+  "main": "(main.js)",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node js/main"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MANiTAR924/EN_or_SP.git"
   },
-  "author": "",
+  "author": "manitar",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/MANiTAR924/EN_or_SP/issues"
