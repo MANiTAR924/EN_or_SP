@@ -5,9 +5,12 @@ let server = http.createServer((req ,res) => {
     res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
 
     if (req.url == '/')
-        fs.createReadStream('./templates/main/index.html').pipe(res)
-    else if(req.url == '/money')
-        fs.createReadStream('./templates/money/money.html').pipe(res)
+        fs.createReadStream('./templates/html/index.html').pipe(res)
+    else if (req.url == '/money')
+        fs.createReadStream('./templates/html/money.html').pipe(res)
+    else
+        fs.createReadStream('./templates/html/error.html').pipe(res)
+
 
 });
 
