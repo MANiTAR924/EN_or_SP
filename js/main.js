@@ -14,10 +14,10 @@ let server = http.createServer((req ,res) => {
 
 });
 
-const PORT = 3000
-const HOST = 'localhost'
+// const PORT = 3000
+// const HOST = 'localhost'
 
-server.listen(PORT, HOST, () => {
-    console.log(`server working http://${HOST}:${PORT}`)
-})
+// server.listen(PORT, HOST, () => {
+//     console.log(`server working http://${HOST}:${PORT}`)
+// })
 
