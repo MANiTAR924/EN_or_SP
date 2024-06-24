@@ -1,23 +1,22 @@
-const http = require('http');
-const fs = require('fs');
+const express = require('express');
 
-let server = http.createServer((req ,res) => {
-    res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+const app = express();
 
-    if (req.url == '/')
-        fs.createReadStream('./templates/html/index.html').pipe(res)
-    else if (req.url == '/money')
-        fs.createReadStream('./templates/html/money.html').pipe(res)
-    else
-        fs.createReadStream('./templates/html/error.html').pipe(res)
+const maindir = "/mnt/D/VScode/repo#/firstOne/"
 
-
-});
+app.get('/' , (req, res) => {
+    res.sendFile(`${maindir}/templates/html/index.html`)
+    if(req.url = '/money'){
+        res.sendFile(`${maindir}/templates/html/error.html`)
+    } else {
+        res.sendFile(`${maindir}/templates/html/money.html`)
+    }
+})
 
 const PORT = 3000
 const HOST = 'localhost'
 
-server.listen(PORT, HOST, () => {
+app.listen(PORT, HOST, () => {
     console.log(`server working http://${HOST}:${PORT}`)
 })
 

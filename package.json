@@ -15,5 +15,8 @@
     "url": "https://github.com/MANiTAR924/EN_or_SP/issues"
   },
   "homepage": "https://github.com/MANiTAR924/EN_or_SP#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }
