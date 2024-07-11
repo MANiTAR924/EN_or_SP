@@ -16,9 +16,8 @@
   },
   "homepage": "https://github.com/MANiTAR924/EN_or_SP#readme",
   "dependencies": {
-    "express": "^4.19.2"
+    "mysql2": "^3.10.2"
   },
-  "devDependencies": {},
   "keywords": [],
   "description": ""
 }
