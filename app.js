@@ -1,6 +1,3 @@
-const PORT = 3000;
-const stream = require('stream');
-const mysql = require('mysql2');
 const fs = require('fs');
 const http = require('http');
 const path = require('path');
@@ -22,29 +19,14 @@ const mimeTypes = {
     '.wasm': 'application/wasm',
 };
 
-const staticFile = (res, filePath, ext) => {
-    fs.readFile('./public/'+filePath , ext, (error, data) => {
-        if (error) {
-            res.statusCode = 404;
-            res.end();
-        }
-        res.end(data);
-    });    
-};
-
-http.createServer (function(req, res) {
+http.createServer(function(req, res) {
     const url = req.url; 
     if (url === '/') {
-        fs.readFile('./public/html/home.html', (error, data) => {
-            if (error) {
-                res.statusCode = 404;
-                res.end();
-            }
-            res.end(data);
-        });    
-    };
+        fs.createReadStream()
+    }
+    else if (url === '/')    
     res.end();
-    console.log(url);
-}).listen(PORT);
+    console.log('Server working on http://localhost:3000');
+}).listen(3000);
 
 

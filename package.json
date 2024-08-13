@@ -1,7 +1,7 @@
 {
-  "name": "firstone",
+  "name": "first",
   "version": "1.0.0",
-  "main": "(serv.js)",
+  "main": "(app.js)",
   "scripts": {
     "test": "node js/serv"
   },
