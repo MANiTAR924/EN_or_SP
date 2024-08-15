@@ -1,23 +1,19 @@
 {
-  "name": "first",
+  "name": "en_or_sp",
   "version": "1.0.0",
-  "main": "(app.js)",
+  "description": "",
+  "main": "app.js",
   "scripts": {
-    "test": "node js/serv"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MANiTAR924/EN_or_SP.git"
   },
-  "author": "manitar",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/MANiTAR924/EN_or_SP/issues"
   },
-  "homepage": "https://github.com/MANiTAR924/EN_or_SP#readme",
-  "dependencies": {
-    "mysql2": "^3.10.2"
-  },
-  "keywords": [],
-  "description": ""
+  "homepage": "https://github.com/MANiTAR924/EN_or_SP#readme"
 }

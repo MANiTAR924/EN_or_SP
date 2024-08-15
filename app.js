@@ -18,15 +18,23 @@ const mimeTypes = {
     '.otf': 'application/font-otf',
     '.wasm': 'application/wasm',
 };
+const server = http.createServer((req, res) => {
+    console.log(`Request for ${req.url} received.\n`);
+if (req.url === '/') {
+    fs.createReadStream('./public/html/home.html').pipe(res);
 
-http.createServer(function(req, res) {
-    const url = req.url; 
-    if (url === '/') {
-        fs.createReadStream()
-    }
-    else if (url === '/')    
-    res.end();
-    console.log('Server working on http://localhost:3000');
-}).listen(3000);
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+} else if (req.url === '/main.css') {
+    fs.createReadStream('./public/css/main.css').pipe(res);
+    
+    res.writeHead(200, { 'Content-Type': 'text/css' });
+} else if (req.url === '/js/logic.js') {
+    fs.createReadStream('./public/js/logic.js').pipe(res);
+    
+    res.writeHead(200, { 'Content-Type': 'text/javascript' });
+    };
+}).listen(3000, () => {
+console.log('Server working on http://localhost:3000');
+});
 
 
