@@ -1,22 +1,19 @@
 {
-  "name": "firstone",
+  "name": "en_or_sp",
   "version": "1.0.0",
-  "main": "(main.js)",
+  "description": "",
+  "main": "app.js",
   "scripts": {
-    "test": "node js/main"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MANiTAR924/EN_or_SP.git"
   },
-  "author": "manitar",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/MANiTAR924/EN_or_SP/issues"
   },
-  "homepage": "https://github.com/MANiTAR924/EN_or_SP#readme",
-  "description": "",
-  "dependencies": {
-    "express": "^4.19.2"
-  }
+  "homepage": "https://github.com/MANiTAR924/EN_or_SP#readme"
 }
