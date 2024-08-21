@@ -1,7 +1,9 @@
 body{
-    background-color: grey;
+    background-color: rgb(152, 152, 204);
+    list-style: none;
+    background-image: url('/public/images/blue-hair-anime-girl-original.jpg');
 }
 
 .mainButton {
-    margin-left: 12%;
+    margin-left: 8%;
 }
