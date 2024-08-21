@@ -18,23 +18,40 @@ const mimeTypes = {
     '.otf': 'application/font-otf',
     '.wasm': 'application/wasm',
 };
+
+function reading (ext, filePath, req,res) {
+    fs.createReadStream(`${filePath}`).pipe(res);
+    console.log(`${}`)
+
+    for (const i in mimeTypes) {
+        if (i === ext){
+            res.writeHead(200, { 'Content-Type': `${mimeTypes[i]}` });
+            
+        }
+        console.log(mimeTypes[i])
+    }
+};
 const server = http.createServer((req, res) => {
     console.log(`Request for ${req.url} received.\n`);
-if (req.url === '/') {
-    fs.createReadStream('./public/html/home.html').pipe(res);
 
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-} else if (req.url === '/main.css') {
-    fs.createReadStream('./public/css/main.css').pipe(res);
+    reading('.html', './public/html/error.html', req, res)
+
+if (req.url === '/') {
+        // reading('.html', './public/html/error.html', req, res)
+        
+}
+//  else if (req.url === '/main.css') {
+//     fs.createReadStream('./public/css/main.css').pipe(res);
     
-    res.writeHead(200, { 'Content-Type': 'text/css' });
-} else if (req.url === '/js/logic.js') {
-    fs.createReadStream('./public/js/logic.js').pipe(res);
+//     res.writeHead(200, { 'Content-Type': 'text/css' });
+// } else if (req.url === '/js/logic.js') {
+//     fs.createReadStream('./public/js/logic.js').pipe(res);
     
-    res.writeHead(200, { 'Content-Type': 'text/javascript' });
-    };
+//     res.writeHead(200, { 'Content-Type': 'text/javascript' });
+// }  
 }).listen(3000, () => {
 console.log('Server working on http://localhost:3000');
 });
+// console.log(http.request())
 
 
