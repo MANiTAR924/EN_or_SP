@@ -18,6 +18,8 @@ const mimeTypes = {
     '.otf': 'application/font-otf',
     '.wasm': 'application/wasm',
 };
+
+
 async function reading (ext, filePath, req ,res) {
     console.log(`[ P ] req for ${req.url}`);
     
