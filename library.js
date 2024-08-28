@@ -19,7 +19,7 @@
 //     res.writeHead(200, { 'Content-Type': 'text/javascript' });
 // }  
 
-const loli = './publ....ic/.html/home.html';
+const loli = './publ....ic/.html/home.js';
 const sss = loli.split('.');
 
 console.log(loli.split('.')[loli.split('.').length-1])

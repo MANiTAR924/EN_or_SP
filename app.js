@@ -2,7 +2,7 @@ const fs = require('fs');
 const http = require('http');
 const path = require('path');
 const mimeTypes = {
-    '.js': 'text/javascript',
+    '.js': 'application/javascript',
     '.html': 'text/html',
     '.css': 'text/css',
     '.json': 'application/json',
@@ -20,28 +20,42 @@ const mimeTypes = {
 };
 
 
-async function reading (ext, filePath, req ,res) {
-    console.log(`[ P ] req for ${req.url}`);
+async function reading (filePath, req ,res) {
+    const ext = filePath.split('.')[filePath.split('.').length-1];
+
+    console.log(`[ P ] req (${ext}) for ${req.url}`);
     
+    fs.createReadStream(`./public${filePath}`).pipe(res);
+
     if (mimeTypes[ext] !== undefined){
-        await fs.createReadStream(`./public${filePath}`).pipe(res);
         
-        res.writeHead(200, { 'Content-Type': `${mimeTypes[ext]}` });
-        console.log(` [ S ] Success request for ${req.url}`);
+        res.writeHead(200, { 'Content-Type': `${mimeTypes[`.${ext}`]}` });
+        // console.log(` [ S ] Success request for ${req.url}`);
     }    
-    
+    return ext
 };
 const server = http.createServer((req, res) => {
-    switch (req.url) {
-        case '/':
-            reading('.html', '/html/home.html', req, res);
-            reading('.css', '/css/main.css', req, res);
-            reading('.js', '/js/logic.js', req, res);
-        case '':
-        default:
-            reading('.html', '/html/error.html', req, req)
+    const s = req.url;
+    // switch (req.url) {
+    //     case '/':
+    //         reading('/html/home.html', req, res);
+    //         // reading('/css/main.css', req, res);
+    //         // reading('/js/logic.js', req, res);
+    //     case '/logic.js':
+    //         reading('/js/logic.js', req, res);
+    //     case '/main.css':
+    //         reading('/css/main.css', req, res);
+    //     default:
+    //         reading('/html/error.html', req, req)
+    // }
+    if (s === '/') {
+        reading('/html/home.html', req , res)
+    } else if (req.url === '/main.css'){
+        reading('/css/main.css', req , res)
+    } else if (req.url === '/js/logic.js'){
+        reading('/js/logic.js', req , res)
     }
-
+    
 
 
 }).listen(3000, () => {
