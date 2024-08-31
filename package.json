@@ -2,7 +2,7 @@
   "name": "en_or_sp",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "(app.js)(library.js)",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
