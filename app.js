@@ -45,27 +45,6 @@ function preReading(req,res) {
  console.log(`.${fExt(req.url)}`)
 }
 
-function reading (filePath, req ,res ) {
-
-    console.log(`[ P ] req () for ${req.url}`);
-    
-    fs.createReadStream(`./public/${ext}${req.url}`).pipe(res);    
-    
-    // if (req.url === '/'){
-    //     fs.createReadStream(`./public/${ext}${req.url}`).pipe(res);
-
-    // } else if (req.url === '/money'){
-    //     fs.createReadStream(`./public/${ext}${req.url}`).pipe(res);
-
-    // }
-
-    if (mimeTypes[ext] !== undefined){
-        
-        res.writeHead(200, { 'Content-Type': `${mimeTypes[`.${ext}`]}` });
-        // console.log(` [ S ] Success request for ${req.url}`);
-    }    
-};
-
 const server = http.createServer((req, res) => {
 
     preReading(req,res)
