@@ -2,7 +2,7 @@
   "name": "en_or_sp",
   "version": "1.0.0",
   "description": "",
-  "main": "(app.js)(library.js)",
+  "main": "app.js",
   "scripts": {
     "build": "node app.js"
   },
