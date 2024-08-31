@@ -1,9 +1,8 @@
 const fs = require('fs');
 const http = require('http');
-const path = require('path');
 const mimeTypes = {
+    '.js': 'application/javascript',
     '.html': 'text/html',
-    '.js': 'text/javascript',
     '.css': 'text/css',
     '.json': 'application/json',
     '.png': 'image/png',
@@ -19,39 +18,58 @@ const mimeTypes = {
     '.wasm': 'application/wasm',
 };
 
-function reading (ext, filePath, req,res) {
-    fs.createReadStream(`${filePath}`).pipe(res);
-    console.log(`${}`)
-
-    for (const i in mimeTypes) {
-        if (i === ext){
-            res.writeHead(200, { 'Content-Type': `${mimeTypes[i]}` });
-            
-        }
-        console.log(mimeTypes[i])
-    }
+function fExt (param) {
+    return param.split('.')[param.split('.').length-1];    
 };
-const server = http.createServer((req, res) => {
-    console.log(`Request for ${req.url} received.\n`);
 
-    reading('.html', './public/html/error.html', req, res)
+function preReading(req,res) {
+    console.log(`[ P ] req (${fExt(req.url)}) for ${req.url}`);
 
-if (req.url === '/') {
-        // reading('.html', './public/html/error.html', req, res)
-        
+    if (req.url === '/'){
+        fs.createReadStream(`./public/html/home.html`).pipe(res);    
+
+        res.writeHead(200, { 'Content-Type': `${mimeTypes[`.html`]}` });
+    } else if (req.url === '/money'){
+        fs.createReadStream(`./public/html/money.html`).pipe(res);    
+
+        res.writeHead(200, { 'Content-Type': `${mimeTypes[`.html`]}` });
+    }else if (fExt(req.url) === 'js'){
+        fs.createReadStream(`./public${req.url}`).pipe(res);    
+
+        res.writeHead(200, { 'Content-Type': `${mimeTypes[`.html`]}` });
+    }else {
+        fs.createReadStream(`./public/${fExt(req.url)}${req.url}`).pipe(res);    
+    
+        res.writeHead(200, { 'Content-Type': `${mimeTypes[`.${fExt(req.url)}`]}` });
+    }
+ console.log(`.${fExt(req.url)}`)
 }
-//  else if (req.url === '/main.css') {
-//     fs.createReadStream('./public/css/main.css').pipe(res);
+
+function reading (filePath, req ,res ) {
+
+    console.log(`[ P ] req () for ${req.url}`);
     
-//     res.writeHead(200, { 'Content-Type': 'text/css' });
-// } else if (req.url === '/js/logic.js') {
-//     fs.createReadStream('./public/js/logic.js').pipe(res);
+    fs.createReadStream(`./public/${ext}${req.url}`).pipe(res);    
     
-//     res.writeHead(200, { 'Content-Type': 'text/javascript' });
-// }  
+    // if (req.url === '/'){
+    //     fs.createReadStream(`./public/${ext}${req.url}`).pipe(res);
+
+    // } else if (req.url === '/money'){
+    //     fs.createReadStream(`./public/${ext}${req.url}`).pipe(res);
+
+    // }
+
+    if (mimeTypes[ext] !== undefined){
+        
+        res.writeHead(200, { 'Content-Type': `${mimeTypes[`.${ext}`]}` });
+        // console.log(` [ S ] Success request for ${req.url}`);
+    }    
+};
+
+const server = http.createServer((req, res) => {
+
+    preReading(req,res)
+
 }).listen(3000, () => {
-console.log('Server working on http://localhost:3000');
+console.log('\nServer working on http://localhost:3000\n');
 });
-// console.log(http.request())
-
-

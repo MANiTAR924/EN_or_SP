@@ -1,7 +1,7 @@
 body{
     background-color: rgb(152, 152, 204);
     list-style: none;
-    background-image: url('/public/images/blue-hair-anime-girl-original.jpg');
+    background-image: url('/blue-hair-anime-girl-original.jpg');
 }
 
 .mainButton {

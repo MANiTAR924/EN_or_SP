@@ -1,20 +1,36 @@
-// const object = { a: 1, b: 2, c: 3 };
-// 
-// for (const property in object) {
-//   console.log(`${property}: ${object[property]}`);
-// }
-// above instance how use loop with object (for..in - use for Objects. for..in for Arrays)
+const fs = require('fs');
+const http = require('http');
+const path = require('path');
 
-if (req.url === '/') {
-    fs.createReadStream('./public/html/home.html').pipe(res);
+function preReading(filePath, req,res) {
+    const ext = filePath.split('.')[filePath.split('.').length-1];    
 
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-} else if (req.url === '/main.css') {
-    fs.createReadStream('./public/css/main.css').pipe(res);
+    fs.createReadStream(`./public/${ext}${filePath}`).pipe(res);    
+
+    res.writeHead(200, { 'Content-Type': `${mimeTypes[`.${ext}`]}` });
+
+}
+
+function reading (filePath, req ,res ) {
+    const ext = filePath.split('.')[filePath.split('.').length-1];
+
+    console.log(`[ P ] req (${ext}) for ${req.url}`);
     
-    res.writeHead(200, { 'Content-Type': 'text/css' });
-} else if (req.url === '/js/logic.js') {
-    fs.createReadStream('./public/js/logic.js').pipe(res);
+    fs.createReadStream(`./public/${ext}${req.url}`).pipe(res);    
     
-    res.writeHead(200, { 'Content-Type': 'text/javascript' });
-}  
+    // if (req.url === '/'){
+    //     fs.createReadStream(`./public/${ext}${req.url}`).pipe(res);
+
+    // } else if (req.url === '/money'){
+    //     fs.createReadStream(`./public/${ext}${req.url}`).pipe(res);
+
+    // }
+
+    if (mimeTypes[ext] !== undefined){
+        
+        res.writeHead(200, { 'Content-Type': `${mimeTypes[`.${ext}`]}` });
+        // console.log(` [ S ] Success request for ${req.url}`);
+    }    
+};
+
+// export {preReading, reading};
