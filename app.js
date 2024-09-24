@@ -45,7 +45,6 @@ function preRead (path, res,  req) {
 }
 function reading(req,res) {
     console.log(`[ P ] req (${fExt(req.url)}) for ${req.url}`);
-    try {
         if (req.url === '/'){
             preRead('home.html', res);
         } else if (req.url === '/money'){
@@ -67,10 +66,6 @@ function reading(req,res) {
                 reading('error.html', res)
             }
         };
-    } catch (error) {
-        console.log('loli');
-    };
-
    
 }
 const pool = mysql.createPool({
