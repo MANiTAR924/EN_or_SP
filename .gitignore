@@ -1,1 +1,4 @@
 .vercel
+private-key.pem
+certificate.pem
+test_cert.pfx
