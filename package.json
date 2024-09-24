@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/MANiTAR924/EN_or_SP/issues"
   },
-  "homepage": "https://github.com/MANiTAR924/EN_or_SP#readme"
+  "homepage": "https://github.com/MANiTAR924/EN_or_SP#readme",
+  "dependencies": {
+    "mariadb": "^3.3.1",
+    "mysql2": "^3.11.0"
+  }
 }

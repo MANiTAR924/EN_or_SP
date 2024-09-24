@@ -1,5 +1,7 @@
 const fs = require('fs');
-const http = require('http');
+const https = require('https');
+const mysql = require('mysql2/promise');
+const { emitWarning } = require('process');
 const mimeTypes = {
     '.js': 'application/javascript',
     '.html': 'text/html',
@@ -18,46 +20,94 @@ const mimeTypes = {
     '.wasm': 'application/wasm',
     '.ico': 'image/x-icon',
 };
+const option = {  
+    key: fs.readFileSync('private-key.pem'),
+    cert: fs.readFileSync('certificate.pem'),
+}; 
 
 function fExt (param) {
     return param.split('.')[param.split('.').length-1];    
 };
+function preRead (path, res,  req) {
+    if(fExt(path) === 'html'){
+        fs.createReadStream(`./public/html/${path}`).pipe(res);    
+        
+        res.writeHead(200, { 'Content-Type': `${mimeTypes[`.html`]}` });
+    } else if (fExt(path) === 'js'){
+        fs.createReadStream(`./public${req.url}`).pipe(res);
+        
+        res.writeHead(200, { 'Content-Type': `${mimeTypes['.'+fExt(path)]}` })
+    } else {
+        try {
+            fs.createReadStream(`./public/${fExt(req.url)}${req.url}`).pipe(res);   
 
-function preReading(req,res) {
+            res.writeHead(200, { 'Content-Type': `${mimeTypes[`.${fExt(req.url)}`]}` });
+        } catch (error) {
+            res.write(`page not found\nERROR: ${error}`)
+        }
+    };
+}
+function reading(req,res) {
     console.log(`[ P ] req (${fExt(req.url)}) for ${req.url}`);
     try {
         if (req.url === '/'){
-            fs.createReadStream(`./public/html/home.html`).pipe(res);    
-
-            res.writeHead(200, { 'Content-Type': `${mimeTypes[`.html`]}` });
+            preRead('home.html', res);
         } else if (req.url === '/money'){
-            fs.createReadStream(`./public/html/money.html`).pipe(res);    
-    
-            res.writeHead(200, { 'Content-Type': `${mimeTypes[`.html`]}` });
-        }else if (fExt(req.url) === 'js'){
-            fs.createReadStream(`./public${req.url}`).pipe(res);    
-    
-            res.writeHead(200, { 'Content-Type': `${mimeTypes[`.js`]}` });
-        }else if(req.url === '/favicon.ico'){
-            fs.createReadStream(`./public/jpg/Untitled.jpeg`).pipe(res);    
-    
-            res.writeHead(200, { 'Content-Type': `${mimeTypes[`.iso`]}` });
+            preRead('money.html', res)
+        }else if(req.url === '/js/logic.js'){
+            preRead('logic.js', res, req)
+        }else if (req.url === '/test'){
+            preRead('test.html', res)
+        }else if (req.url === '/favicon.ico'){
+            res.writeHead(200)
+        }else if (req.url === '/sign'){
+            preRead('regist.html', res)
         }else {
-            fs.createReadStream(`./public/${fExt(req.url)}${req.url}`).pipe(res);    
-        
-            res.writeHead(200, { 'Content-Type': `${mimeTypes[`.${fExt(req.url)}`]}` });
+            try {
+                fs.createReadStream(`./public/${fExt(req.url)}${req.url}`).pipe(res);   
+
+                res.writeHead(200, { 'Content-Type': `${mimeTypes[`.${fExt(req.url)}`]}` });
+            } catch (error) {
+                reading('error.html', res)
+            }
         };
     } catch (error) {
-        throw error
+        console.log('loli');
     };
 
-    
+   
+}
+const pool = mysql.createPool({
+    host: '127.0.0.1',
+    user: 'root',
+    password: 'Q2102(!LsqlO', 
+    database: 'db'
+});
+async function insertData() {
+    let conn;
+    try {
+        conn = await pool.getConnection();
+
+        // Данные для вставки
+        const name = 'John';
+        const age = 30;
+        // const email = document.
+
+        // Запрос на вставку данных
+        const res = conn.query(`select * from users`);
+
+        console.log(await res);
+    } catch (err) {
+        console.error('Ошибка:', err);
+    } finally {
+        if (conn) conn.release(); // Закрываем подключение
+    }
 }
 
-const server = http.createServer((req, res) => {
 
-    preReading(req,res)
-
+const server = https.createServer(option, (req, res) => {
+    
+    reading(req,res)
 }).listen(3000, () => {
-console.log('\nServer working on http://localhost:3000\n');
+console.log('\nServer working on https://localhost:3000\n');
 });

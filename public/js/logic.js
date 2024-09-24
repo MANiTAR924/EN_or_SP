@@ -1,15 +1,20 @@
-// document.getElementsByClassName("mainButton"),
-//   document.addEventListener("click", newBlank);
 
-// function newBlank() {
-//   const input0 = document.querySelector("input").value;
+const input0 = document.querySelector("input");
+const button = document.getElementById('btn');
+const container = document.getElementById("container");
+document.getElementById('reg').addEventListener('click', () => {
+    fetch('/sign').then(loli => console.log(loli))
+});
 
-//   const datamuseUrl = "https://api.datamuse.com/words?ml=";
-//   const resWord = `${datamuseUrl + input0}`;
 
-//   console.log(fetch(resWord));
-//   const p = document.createElement("p");
-//   document.body.appendChild(p);
-//   console.log(`input = ${input0}`);
-// }
-console.log('loli h')
+button.addEventListener('click', () => {
+    // Создаем новый элемент
+    const newElement = document.createElement('li');
+    newElement.classList.toggle('newBlankSt')
+    newElement.textContent = `${input0.value}`;
+
+    // Добавляем его в контейнер
+ 
+    container.appendChild(newElement);
+});
+

@@ -3,39 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="home.css" />
     <title>Server</title>
   </head>
 
   <body>
     <header>
-      <label>
-        <a href="/money">money</a>
-      </label>
+      <button type="button" id="reg">register</button>
       <h1>main</h1>
     </header>
-    <main>
+    <main id="main">
       <div>
         <form id="blank">
-          <ul>
-            <li>
-              <label>input</label>
+          <ul class='container'>
+            <li class="group">
+              <input type="text" class="input" name="text" required>
+              <label class="label">input</label>
+            </li>
+            <li class="group">
+              <input type="text" class="input" required>
+              <label class="label">inpuiara</label>
             </li>
           </ul>
-          <ul>
-            <li>
-              <input type="text" id="input" placeholder="Enter a word" />
-            </li>
-          </ul>
-          <button type="button" id="addBlank" class="mainButton">
+          <button type="button" id="btn" class="mainButton">
             add new notice
           </button>
         </form>
+        
+        
+      </div>
+      <div>
+        <ul id="container">
+  
+        </ul>
+
       </div>
     </main>
-
     <footer></footer>
-
-    <script src="/js/logic.js"></script>
+      <script src="/js/logic.js"></script>
   </body>
 </html>
