@@ -1,5 +1,5 @@
 const fs = require('fs');
-const https = require('https');
+const http = require('http');
 const mysql = require('mysql2/promise');
 const { emitWarning } = require('process');
 const mimeTypes = {
@@ -105,7 +105,7 @@ async function insertData() {
 }
 
 
-const server = https.createServer(option, (req, res) => {
+const server = http.createServer((req, res) => {
     
     reading(req,res)
 }).listen(3000, () => {
