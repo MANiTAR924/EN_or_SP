@@ -53,8 +53,6 @@ function reading(req,res) {
             preRead('logic.js', res, req)
         }else if (req.url === '/test'){
             preRead('test.html', res)
-        }else if (req.url === '/favicon.ico'){
-            res.writeHead(200)
         }else if (req.url === '/sign'){
             preRead('regist.html', res)
         }else {
