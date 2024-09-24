@@ -20,10 +20,6 @@ const mimeTypes = {
     '.wasm': 'application/wasm',
     '.ico': 'image/x-icon',
 };
-const option = {  
-    key: fs.readFileSync('private-key.pem'),
-    cert: fs.readFileSync('certificate.pem'),
-}; 
 
 function fExt (param) {
     return param.split('.')[param.split('.').length-1];    
